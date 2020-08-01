@@ -40,9 +40,9 @@ class LinkedList:
 
     def reverse_list(self, node, prev):
 
-        current = self.head
+        current = self.head #start with the head of the LL
         
-        while current is not None:
+        while current is not None: #iterates through LL until it gets to the very end
             self.add_to_head(current.value) #adds current to the front of list
-            current = current.next_node #iterates through nodes until it reaches the end
+            current = current.next_node #setting the next ndoe to be checked
             
