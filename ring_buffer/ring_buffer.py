@@ -2,13 +2,20 @@ class RingBuffer:
     def __init__(self, capacity):
         self.capacity = capacity
         self.storage = []
-        oldest = self.storage[0]
-        #we need to id the oldest item and replace it when the ring is full.
+        #oldest index to be used when deleting and replacing oldest item in self.storage
+        self.oldestIndex = 0 
+        
+    def setOldest(self):
+        self.oldestIndex = (self.oldestIndex + 1) % self.capacity
+        #keeping oldest index from incrementing past capacity
 
     def append(self, item):
-        if len(self.storage) == self.capacity:
-            self.storage.pop(0) #removes from front
-        self.storage.append(item) #adds to end
+        #if adding to list that's not full...
+        if len(self.storage) <= self.capacity - 1:
+            self.storage.append(item)
+        else:
+            self.storage[self.oldestIndex] = item
+        self.setOldest()
 
     def get(self):
         return self.storage
